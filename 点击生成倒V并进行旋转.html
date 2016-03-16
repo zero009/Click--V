@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#div1{
+				width: 500px;
+				height: 500px;
+				border: 1px solid #000;
+				margin:50px;
+				position: relative;
+			}
+			#div1 div{
+				width: 50px;
+				height: 50px;
+				background: red;
+				position: absolute;
+				left: 0;
+				top:0;
+			}
+		</style>
+<script>
+window.onload = function(){
+	var oBtn = document.getElementById('btn');
+	var oDiv = document.getElementById('div1');
+	var str = '';
+	var n = 0;
+	var len = 5;
+	var l,t;
+	//先生成
+	for(var i=0;i<len;i++){
+		str += '<div>'+(i+1)+'</div>'
+	}
+	oDiv.innerHTML = str;
+	var aDiv = oDiv.getElementsByTagName('div');
+	oBtn.onclick = function(){
+		
+		for(var i=0;i<aDiv.length;i++){
+			if(n%4 == 0){
+				t = i*50;
+				i < len/2?l = i*50:l = (len-i-1)*50;
+			}else if(n%4 == 1){
+				l = i*50;
+				i < len/2?t = i*50:t = (len-i-1)*50;
+			}else if(n%4 == 2){
+				t = i*50;
+				i > len/2?l = i*50:l = (len-i-1)*50;
+			}else if(n%4 == 3){
+				l = i*50;
+				i > len/2?t = i*50:t = (len-i-1)*50;
+			}
+			aDiv[i].style.top = t + 'px';
+			aDiv[i].style.left = l + 'px';
+		}
+		n++;
+
+	}
+}
+</script>
+	</head>
+
+	<body>
+		<input type="button" value="生成V形" id="btn" />
+		<div id="div1"></div>
+	</body>
+</html>
